@@ -32,5 +32,14 @@ class ArticleEntity
         return $this->dateTime;
     }
 
+    public function getFirstComment(): ArticleCommentEntity
+    {
+        return new ArticleCommentEntity(
+            1,
+            $this->getUser(),
+            "",
+            "First comment of article"
+        );
+    }
 
 }

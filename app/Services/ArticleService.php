@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Entities\ArticleCollection;
 use App\Entities\ArticleEntity;
 use App\Interfaces\ArticleRepositoryInterface;
 
@@ -11,6 +12,13 @@ class ArticleService
         private ArticleRepositoryInterface $articleRepository,
         private UserService $userService
     ) {
+    }
+
+    public function getArticles(int $limit, int $offset): ArticleCollection
+    {
+        $articles = $this->articleRepository->getArticles($limit, $offset);
+
+        return new ArticleCollection($articles);
     }
 
     public function createArticle($data): ArticleEntity

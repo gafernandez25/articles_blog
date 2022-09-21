@@ -19,7 +19,12 @@ class ArticlePdoRepository implements ArticleRepositoryInterface
     public function getArticles(int $limit, int $offset)
     {
         try {
-            $sql = "SELECT id,title,user_id,created_at FROM articles LIMIT :limit OFFSET :offset";
+            $sql = "SELECT 
+            a.id,a.title,a.user_id,a.created_at,
+            u.id as user_id,u.email,u.first_name,u.last_name 
+            FROM articles as a
+            JOIN users as u ON a.user_id=u.id 
+            LIMIT :limit OFFSET :offset";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
             $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);

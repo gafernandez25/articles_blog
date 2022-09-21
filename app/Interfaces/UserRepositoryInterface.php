@@ -8,5 +8,5 @@ interface UserRepositoryInterface
 
     public function getById(int $id);
 
-    public function getByEmailAndPassword(string $email, string $password);
+    public function getByEmail(string $email);
 }

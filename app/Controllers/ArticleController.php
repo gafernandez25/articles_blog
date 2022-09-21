@@ -4,18 +4,25 @@ namespace App\Controllers;
 
 use App\DBPdo;
 use App\FormValidators\ArticleControllerValidator;
-use App\Interfaces\ArticleRepositoryInterface;
-use App\Interfaces\DBPdoInterface;
+use App\Repositories\ArticlePdoRepository;
+use App\Repositories\UserPdoRepository;
 use App\Services\ArticleService;
+use App\Services\UserService;
+use App\View;
 
 class ArticleController
 {
+    private ArticleService $articleService;
+
     public function __construct(
-//        private DBPdo $db,     //change to interface and bind param somewhere else
-//        private ArticleRepositoryInterface $articleRepository,
-        private ArticleService $articleService,
         private ArticleControllerValidator $validator
     ) {
+        $this->articleService = new ArticleService(
+            new ArticlePdoRepository(new DBPdo()),
+            new UserService(
+                new UserPdoRepository(new DBPdo())
+            )
+        );
     }
 
     public function index()
@@ -26,8 +33,9 @@ class ArticleController
         $articles = $this->articleService->getArticles(3, 0);
 
         //return to view
-        echo "<pre>";
-        print_r($articles);
+        return View::make("article/index", [
+            "articles" => $articles,
+        ])->render();
     }
 
     public function show()

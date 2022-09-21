@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Entites;
+namespace App\Entities;
 
+use App\Entities\ArticleEntity;
 use App\Factories\UserFactory;
 use Exception;
 use JetBrains\PhpStorm\Internal\TentativeType;
@@ -20,8 +21,13 @@ class ArticleCollection implements \IteratorAggregate
             return new ArticleEntity(
                 $elem->id,
                 $elem->title,
-                new UserFactory($elem->user),
-                $elem->created_at
+                UserFactory::create([
+                    "id" => $elem->user_id,
+                    "email" => $elem->email,
+                    "first_name" => $elem->first_name,
+                    "last_name" => $elem->last_name
+                ]),
+                \DateTime::createFromFormat("Y-m-d H:i:d", $elem->created_at)
             );
         }, $data);
     }
