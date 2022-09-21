@@ -14,12 +14,9 @@ class AuthService
 
     public function authenticateUser(string $email, string $password): array|bool
     {
-        $user = $this->userRepository->getByEmailAndPassword(
-            $email,
-            $this->passwordService->hashPassword($password)
-        );
+        $user = $this->userRepository->getByEmail($email);
 
-        return $user ?? false;
+        return password_verify($password, $user->password);
     }
 
 

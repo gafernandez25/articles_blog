@@ -30,17 +30,21 @@ class AuthController
             //not valid
             //Session variable to show error message
             header("location: /login");
+            die;
         }
 
-        $this->userService->setSessionLoggedUser();
+        $_SESSION["loggedUser"] = $email;
 
         header("location: /");
+        die;
     }
 
     public function logout()
     {
+//        unset($_SESSION["loggedUser"]);
         session_destroy();
-        header("location: /login");
+        header("location: /");
+        die;
     }
 
 }

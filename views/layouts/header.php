@@ -48,10 +48,49 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item">
-                        <a href="/" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon far fa-envelope"></i>
-                            <p>Articles</p>
+                            <p>Articles <i class="right fas fa-angle-left"></i></p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/articles" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>List</p>
+                                </a>
+                            </li>
+                            <?php
+                            if (isset($_SESSION["loggedUser"])):
+                                ?>
+                                <li class="nav-item">
+                                    <a href="/articles/create" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>New</p>
+                                    </a>
+                                </li>
+                            <?php
+                            endif;
+                            ?>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <?php
+                        if (isset($_SESSION["loggedUser"])):
+                            ?>
+                            <a href="/logout" class="nav-link">
+                                <i class="nav-icon far fa-envelope"></i>
+                                <p>Logout</p>
+                            </a>
+                        <?php
+                        else:
+                            ?>
+                            <a href="/login" class="nav-link">
+                                <i class="nav-icon far fa-envelope"></i>
+                                <p>Login</p>
+                            </a>
+                        <?php
+                        endif;
+                        ?>
                     </li>
                 </ul>
             </nav>
