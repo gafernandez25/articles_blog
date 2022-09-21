@@ -17,6 +17,8 @@ class ArticleController
     public function __construct(
         private ArticleControllerValidator $validator
     ) {
+        //todo: improve the dependency injection container to get Reflection classes
+        // and binding interfaces to concrete classes
         $this->articleService = new ArticleService(
             new ArticlePdoRepository(new DBPdo()),
             new UserService(
