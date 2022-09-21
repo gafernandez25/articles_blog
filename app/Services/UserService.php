@@ -24,7 +24,6 @@ class UserService
             $user->email,
             $user->first_name,
             $user->last_name,
-            $user->last_name,
         );
     }
 }

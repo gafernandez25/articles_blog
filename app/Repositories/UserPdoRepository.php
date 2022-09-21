@@ -34,4 +34,19 @@ class UserPdoRepository implements UserRepositoryInterface
             throw new \Exception();
         }
     }
+
+    public function getByEmailAndPassword(string $email, string $password)
+    {
+        try {
+            $sql = "SELECT id,email,password FROM users WHERE email=:email and password=:password";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(":email", $email);
+            $stmt->bindValue(":password", $password);
+            $stmt->execute();
+            return $stmt->fetchObject();
+        } catch (PDOException $e) {
+//            file_put_contents('./logs/log_' . date("Y-m-d") . '.log', "H:i:s -- " . $e->getMessage(), FILE_APPEND);
+            throw new \Exception();
+        }
+    }
 }
