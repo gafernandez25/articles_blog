@@ -3,15 +3,15 @@
 namespace App\Repositories;
 
 use App\Interfaces\ArticleRepositoryInterface;
-use App\Interfaces\DBInterface;
+use App\Interfaces\DBPdoInterface;
 use PDO;
 use PDOException;
 
 class ArticlePdoArticleRepository implements ArticleRepositoryInterface
 {
-    private $conn;
+    private PDO $conn;
 
-    public function __construct(DBInterface $db)
+    public function __construct(DBPdoInterface $db)
     {
         $this->conn = $db->getConn();
     }

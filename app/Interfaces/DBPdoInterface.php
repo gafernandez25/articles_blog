@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface DBInterface
+interface DBPdoInterface
 {
     public function getConn();
 }
