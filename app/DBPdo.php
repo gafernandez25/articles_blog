@@ -13,7 +13,7 @@ class DBPdo implements DBPdoInterface
 
     public function __construct()
     {
-        $dotenv = Dotenv::createImmutable(dirname(__DIR__, 2));
+        $dotenv = Dotenv::createImmutable(dirname(__DIR__, 1));
         $dotenv->load();
 
         $params = [
@@ -34,7 +34,7 @@ class DBPdo implements DBPdoInterface
                 [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
             );
         } catch (PDOException $e) {
-            file_put_contents('./logs/log_' . date("Y-m-d") . '.log', "H:i:s -- " . $e->getMessage(), FILE_APPEND);
+//            file_put_contents('./logs/log_' . date("Y-m-d") . '.log', "H:i:s -- " . $e->getMessage(), FILE_APPEND);
             throw new \Exception("DB not connected");
         }
     }
