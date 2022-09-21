@@ -2,7 +2,7 @@
 
 namespace App\Factories;
 
-use App\Entites\UserEntity;
+use App\Entities\UserEntity;
 
 class UserFactory
 {
