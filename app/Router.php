@@ -2,13 +2,11 @@
 
 namespace App;
 
-use App\Container;
-
 class Router
 {
     private array $routes;
 
-    public function __construct(private Container $container)
+    public function __construct(private \DI\Container $container)
     {
     }
 

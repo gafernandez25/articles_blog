@@ -16,7 +16,7 @@ class AuthService
     {
         $user = $this->userRepository->getByEmail($email);
 
-        return password_verify($password, $user->password);
+        return $this->passwordService->isPasswordValid($user->password,$password);
     }
 
 

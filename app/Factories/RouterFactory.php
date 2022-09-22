@@ -2,13 +2,18 @@
 
 namespace App\Factories;
 
-use App\Container;
 use App\Router;
+use DI;
 
 class RouterFactory
 {
     public static function create()
     {
-        return new Router(new Container());
+        $builder = new DI\ContainerBuilder();
+        $builder->addDefinitions(dirname(__DIR__, 2) . "/config/container.php");
+
+        $container = $builder->build();
+
+        return new Router($container);
     }
 }

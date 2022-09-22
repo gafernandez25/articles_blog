@@ -10,6 +10,10 @@ use App\View;
 
 class AuthController
 {
+    public function __construct(private AuthService $authService)
+    {
+    }
+
     public function index()
     {
         return View::make("auth/login")->render();
@@ -24,11 +28,7 @@ class AuthController
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        //todo: improve the dependency injection container to get Reflection classes
-        // and binding interfaces to concrete classes
-        $authService = new AuthService(new UserPdoRepository(new DBPdo()), new PasswordService());
-
-        if (!$authService->authenticateUser($email, $password)) {
+        if (!$this->authService->authenticateUser($email, $password)) {
             //not valid
             //Session variable to show error message
             header("location: /login");
