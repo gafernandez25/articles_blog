@@ -54,7 +54,7 @@ class Container implements ContainerInterface
             $type = $param->getType();
 
             if (!$type) {
-                throw new \Exception("Param name has no typehine");
+                throw new \Exception("Param name has no typehint");
             }
 
             if ($type instanceof \ReflectionUnionType) {
