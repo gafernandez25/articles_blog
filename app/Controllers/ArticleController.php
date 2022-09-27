@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\DBPdo;
 use App\FormValidators\ArticleControllerValidator;
 use App\Services\ArticleService;
 use App\View;
